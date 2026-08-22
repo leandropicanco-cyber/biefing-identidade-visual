@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossiê de Marca — Briefing de Identidade Visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F1E7;
+    --paper-deep:#ECE6D6;
+    --ink:#1C1912;
+    --ink-soft:#5B5548;
+    --ink-faint:#8B8474;
+    --line:#D8CFB8;
+    --gold:#B8860B;
+    --gold-deep:#8C6608;
+    --plum:#4A3B52;
+    --rose:#9C3B41;
+    --card:#FFFEF9;
+    --radius:2px;
+    --shadow: 0 1px 0 rgba(28,25,18,.06);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(28,25,18,.05) 1px, transparent 0);
+    background-size:22px 22px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+  }
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0; color:var(--ink); font-weight:600;}
+
+  /* ---------- HEADER ---------- */
+  .masthead{
+    padding:38px 28px 26px;
+    border-bottom:1.5px solid var(--ink);
+    max-width:1180px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .masthead h1{font-size:clamp(26px,3.4vw,40px); line-height:1.05; letter-spacing:-.01em;}
+  .masthead .sub{color:var(--ink-soft); font-size:14.5px; max-width:480px; margin-top:8px; line-height:1.5;}
+  .masthead .stamp{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    text-align:right;
+    line-height:1.7;
+  }
+  .masthead .stamp b{color:var(--ink); font-weight:600;}
+
+  /* ---------- LAYOUT ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:0;
+    align-items:start;
+  }
+  nav.tabs{
+    position:sticky;
+    top:0;
+    align-self:start;
+    padding:26px 10px 40px 28px;
+    max-height:100vh;
+    overflow-y:auto;
+  }
+  nav.tabs .tab{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 10px;
+    cursor:pointer;
+    border-left:2px solid transparent;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    transition:color .15s, border-color .15s;
+  }
+  nav.tabs .tab:hover{color:var(--ink);}
+  nav.tabs .tab.active{color:var(--ink); border-left-color:var(--gold);}
+  nav.tabs .tab .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--line);
+    flex:none;
+  }
+  nav.tabs .tab.done .dot{background:var(--gold);}
+  nav.tabs .tab .label{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;
+    letter-spacing:0;
+    text-transform:none;
+  }
+  nav.tabs .progress-mini{
+    margin-top:18px; padding-top:14px; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-soft);
+  }
+  nav.tabs .progress-track{
+    height:3px; background:var(--line); margin-top:8px; overflow:hidden;
+  }
+  nav.tabs .progress-fill{height:100%; background:var(--gold); width:0%; transition:width .3s;}
+
+  main{padding:26px 28px 120px 24px;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    padding:34px clamp(20px,4vw,46px);
+    margin-bottom:22px;
+    scroll-margin-top:20px;
+  }
+  .card .head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:22px; padding-bottom:16px;
+    border-bottom:1px solid var(--line);
+  }
+  .card .head .num{
+    font-family:'Fraunces',serif; font-weight:600; font-size:30px; color:var(--gold-deep); line-height:1;
+  }
+  .card .head h2{font-size:21px;}
+  .card .helptext{color:var(--ink-soft); font-size:13px; margin:-10px 0 20px; line-height:1.5; max-width:640px;}
+
+  .field{margin-bottom:22px;}
+  .field:last-child{margin-bottom:0;}
+  .field label.q{
+    display:block; font-size:14px; font-weight:500; color:var(--ink); margin-bottom:8px; line-height:1.4;
+  }
+  .field label.q .hint{color:var(--ink-faint); font-weight:400; font-size:12.5px; display:block; margin-top:2px;}
+  textarea, input[type=text], input[type=date]{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--line);
+    padding:8px 2px;
+    resize:vertical;
+    outline:none;
+    transition:border-color .15s;
+  }
+  textarea{min-height:64px;}
+  textarea:focus, input:focus{border-bottom-color:var(--gold);}
+  textarea::placeholder, input::placeholder{color:var(--ink-faint);}
+
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:22px;}
+  @media(max-width:640px){.row2,.row3{grid-template-columns:1fr;}}
+
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-size:13px; padding:8px 14px; border:1px solid var(--line); cursor:pointer;
+    user-select:none; color:var(--ink-soft); background:var(--paper); transition:all .15s;
+    font-family:'Inter',sans-serif;
+  }
+  .chip input{display:none;}
+  .chip.checked{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .chip .limit-note{display:none;}
+
+  .field .maxnote{font-size:11.5px; color:var(--ink-faint); margin-top:6px; font-family:'IBM Plex Mono',monospace;}
+  .field .maxnote.warn{color:var(--rose);}
+
+  .outro-input{margin-top:10px; max-width:280px;}
+
+  /* spectrum rows for section 8 */
+  .spectrum{margin-bottom:26px;}
+  .spectrum:last-child{margin-bottom:6px;}
+  .spectrum .labels{display:flex; justify-content:space-between; font-size:13px; color:var(--ink-soft); margin-bottom:9px;}
+  .spectrum .labels span:first-child{text-align:left;}
+  .spectrum .labels span:last-child{text-align:right;}
+  .spectrum .dots{display:flex; align-items:center; gap:0; justify-content:space-between; position:relative;}
+  .spectrum .dots::before{
+    content:''; position:absolute; left:9px; right:9px; top:50%; height:1px; background:var(--line); transform:translateY(-50%); z-index:0;
+  }
+  .spectrum .dot-opt{
+    position:relative; z-index:1; width:18px; height:18px; border-radius:50%;
+    border:1.5px solid var(--ink-faint); background:var(--card); cursor:pointer;
+  }
+  .spectrum .dot-opt input{display:none;}
+  .spectrum .dot-opt.checked{background:var(--gold); border-color:var(--gold-deep);}
+
+  fieldset{border:none; padding:0; margin:0;}
+
+  .radio-list{display:flex; flex-direction:column; gap:9px;}
+  .radio-item{display:flex; align-items:center; gap:9px; cursor:pointer; font-size:14px; color:var(--ink-soft);}
+  .radio-item input{accent-color:var(--gold-deep); width:15px; height:15px;}
+  .radio-item.checked{color:var(--ink); font-weight:500;}
+
+  /* ---------- ACTION BAR ---------- */
+  .actionbar{
+    position:sticky; bottom:0; left:0; right:0;
+    background:var(--ink); color:var(--paper);
+    padding:14px 28px; margin-top:8px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    z-index:20;
+  }
+  .actionbar .stat{font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C9C2AE;}
+  .actionbar .stat b{color:var(--paper);}
+  .actionbar .buttons{display:flex; gap:10px;}
+  .btn{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; padding:11px 20px;
+    border:1px solid var(--paper); background:transparent; color:var(--paper); cursor:pointer;
+    transition:background .15s, color .15s;
+  }
+  .btn.primary{background:var(--gold); border-color:var(--gold); color:#1C1912;}
+  .btn:hover{background:var(--paper); color:var(--ink);}
+  .btn.primary:hover{background:var(--gold-deep); color:#fff; border-color:var(--gold-deep);}
+  .btn.ghost{border-color:#55503f; color:#C9C2AE;}
+  .btn.ghost:hover{background:#2a271f; color:var(--paper);}
+
+  /* ---------- REPORT OVERLAY ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,17,10,.6); z-index:100;
+    display:none; align-items:flex-start; justify-content:center; padding:40px 16px; overflow-y:auto;
+  }
+  .overlay.open{display:flex;}
+  .report-doc{
+    background:var(--card); max-width:760px; width:100%; margin:0 auto 40px;
+    border:1px solid var(--line); box-shadow:0 20px 50px rgba(0,0,0,.25);
+  }
+  .report-toolbar{
+    position:sticky; top:0; background:var(--ink); color:var(--paper);
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    padding:12px 22px; flex-wrap:wrap;
+  }
+  .report-toolbar .title{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.06em;}
+  .report-body{padding:44px clamp(20px,5vw,60px) 60px;}
+  .report-body h1{font-size:26px; margin-bottom:4px;}
+  .report-body .meta{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); margin-bottom:30px; line-height:1.8;}
+  .report-body .meta b{color:var(--ink);}
+  .report-body h2{
+    font-size:16px; margin-top:34px; margin-bottom:14px; padding-bottom:8px;
+    border-bottom:1px solid var(--ink); display:flex; gap:10px; align-items:baseline;
+  }
+  .report-body h2 .n{color:var(--gold-deep); font-family:'IBM Plex Mono',monospace; font-size:13px;}
+  .report-q{margin-bottom:14px;}
+  .report-q .q{font-size:12.5px; color:var(--ink-soft); margin-bottom:3px;}
+  .report-q .a{font-size:14.5px; color:var(--ink); line-height:1.55; white-space:pre-wrap;}
+  .report-q .a.empty{color:var(--ink-faint); font-style:italic;}
+
+  @media print{
+    body *{visibility:hidden;}
+    .report-doc, .report-doc *{visibility:visible;}
+    .report-doc{position:absolute; top:0; left:0; width:100%; box-shadow:none; border:none;}
+    .report-toolbar{display:none;}
+  }
+  @media(max-width:900px){
+    .layout{grid-template-columns:1fr;}
+    nav.tabs{
+      position:sticky; top:0; z-index:30; background:var(--paper);
+      display:flex; overflow-x:auto; max-height:none; padding:12px 14px; gap:2px;
+      border-bottom:1px solid var(--line);
+    }
+    nav.tabs .tab{border-left:none; border-bottom:2px solid transparent; flex:none; white-space:nowrap;}
+    nav.tabs .tab.active{border-bottom-color:var(--gold);}
+    nav.tabs .progress-mini{display:none;}
+  }
+  ::selection{background:var(--gold); color:#1C1912;}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div>
+    <div class="eyebrow">Dossiê Nº BR-2026 · Briefing Estratégico</div>
+    <h1>Identidade Visual</h1>
+    <div class="sub">Um guia para entender a essência, o posicionamento e a personalidade da marca antes de transformar tudo isso em design. Não existe resposta certa ou errada — responda com espontaneidade.</div>
+  </div>
+  <div class="stamp">
+    NOME DA MARCA<br>
+    <b id="stampNome">— não informado —</b><br><br>
+    RESPONSÁVEL / DATA<br>
+    <b id="stampResp">— / —</b>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="tabs" id="tabNav">
+    <!-- tabs injected by JS -->
+    <div class="progress-mini">
+      PREENCHIMENTO <span id="progressPct">0%</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- sections injected by JS -->
+  </main>
+</div>
+
+<div class="actionbar">
+  <div class="stat"><b id="filledCount">0</b> / <span id="totalCount">0</span> campos preenchidos</div>
+  <div class="buttons">
+    <button class="btn ghost" id="btnReset">Limpar tudo</button>
+    <button class="btn primary" id="btnReport">Gerar relatório</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="report-doc">
+    <div class="report-toolbar">
+      <div class="title">RELATÓRIO GERADO · PRONTO PARA ENVIO</div>
+      <div class="buttons" style="display:flex;gap:8px;">
+        <button class="btn" id="btnCopy" style="padding:8px 14px;font-size:12.5px;">Copiar texto</button>
+        <button class="btn" id="btnDownload" style="padding:8px 14px;font-size:12.5px;">Baixar .txt</button>
+        <button class="btn" id="btnPrint" style="padding:8px 14px;font-size:12.5px;">Imprimir / PDF</button>
+        <button class="btn primary" id="btnClose" style="padding:8px 14px;font-size:12.5px;">Fechar</button>
+      </div>
+    </div>
+    <div class="report-body" id="reportBody"></div>
+  </div>
+</div>
+
+<script>
+/* ======================= DATA MODEL ======================= */
+// Each section: { n, title, help, fields:[ {id, type, label, hint, options, max, allowOther, spectrum} ] }
+const SECTIONS = [
+{n:1, title:"Sobre o Projeto", fields:[
+  {id:"s1_nome", type:"text", label:"Nome da marca"},
+  {id:"s1_significado", type:"textarea", label:"Existe algum significado por trás do nome?"},
+  {id:"s1_status", type:"radio", label:"A marca já existe ou está sendo criada do zero?", options:["Marca nova","Marca já existente","Redesign / atualização","Rebranding / mudança de posicionamento"]},
+  {id:"s1_motivacao", type:"textarea", label:"O que motivou a criação ou atualização da marca?"},
+  {id:"s1_expectativa", type:"textarea", label:"O que você espera alcançar com este projeto?"},
+  {id:"s1_prazo", type:"textarea", label:"Existe algum prazo importante para o lançamento ou apresentação da nova identidade?"},
+]},
+{n:2, title:"O Negócio", fields:[
+  {id:"s2_negocio", type:"textarea", label:"O que a empresa/marca faz?", hint:"Explique como se estivesse contando para alguém que nunca ouviu falar da empresa."},
+  {id:"s2_produtos", type:"textarea", label:"Quais produtos ou serviços vocês oferecem?"},
+  {id:"s2_principal", type:"textarea", label:"Qual é o principal produto/serviço?"},
+  {id:"s2_melhor_concorrente", type:"textarea", label:"O que vocês fazem melhor do que seus concorrentes?"},
+  {id:"s2_diferencial", type:"textarea", label:"Qual é o principal diferencial da marca?"},
+  {id:"s2_porque_escolher", type:"textarea", label:"Por que um cliente deveria escolher vocês e não outra empresa?"},
+  {id:"s2_problema", type:"textarea", label:"Qual é o principal problema que a marca resolve para o cliente?"},
+  {id:"s2_futuro", type:"textarea", label:"Como você gostaria que a empresa estivesse daqui a 3–5 anos?"},
+  {id:"s2_novos_mercados", type:"textarea", label:"Existe algum produto, serviço ou mercado que vocês pretendem explorar no futuro?"},
+]},
+{n:3, title:"Propósito e Essência", fields:[
+  {id:"s3_porque_existe", type:"textarea", label:"Por que essa marca existe?", hint:"Não pense apenas em vender. Qual é a razão de existir da empresa?"},
+  {id:"s3_proporcionar", type:"textarea", label:"O que vocês querem proporcionar às pessoas?"},
+  {id:"s3_valores", type:"checkbox", label:"Quais valores são inegociáveis para a marca?", hint:"Escolha até 5.", max:5, allowOther:true,
+    options:["Qualidade","Exclusividade","Inovação","Tradição","Acessibilidade","Sofisticação","Simplicidade","Proximidade","Confiança","Sustentabilidade","Criatividade","Tecnologia","Autenticidade"]},
+  {id:"s3_ideia_unica", type:"textarea", label:"Se a marca pudesse defender uma única ideia, qual seria?"},
+  {id:"s3_frase_existe", type:"textarea", label:'Complete: "Nossa marca existe para..."'},
+]},
+{n:4, title:"Público-Alvo", fields:[
+  {id:"s4_cliente_ideal", type:"textarea", label:"Quem é o cliente ideal da marca?", hint:"Descreva uma pessoa real, não apenas uma faixa etária."},
+  {id:"s4_faixa_etaria", type:"text", label:"Faixa etária predominante"},
+  {id:"s4_onde_vive", type:"textarea", label:"Onde esse público vive?"},
+  {id:"s4_perfil_economico", type:"textarea", label:"Qual é o perfil econômico desse público?"},
+  {id:"s4_valoriza", type:"textarea", label:"O que essa pessoa valoriza?"},
+  {id:"s4_influencia", type:"textarea", label:"O que influencia sua decisão de compra?"},
+  {id:"s4_porque_escolhe", type:"textarea", label:"O que faz essa pessoa escolher uma marca em vez de outra?"},
+  {id:"s4_publico_nao", type:"textarea", label:"Existe algum público que NÃO queremos atrair?"},
+  {id:"s4_sentimento", type:"textarea", label:"Como você gostaria que seu cliente se sentisse ao entrar em contato com a marca?"},
+]},
+{n:5, title:"Posicionamento", fields:[
+  {id:"s5_desejada", type:"textarea", label:"Como você gostaria que as pessoas descrevessem sua marca?"},
+  {id:"s5_evitar", type:"textarea", label:"Como você NÃO gostaria que descrevessem sua marca?"},
+  {id:"s5_frase1", type:"text", label:'Complete: "Somos uma marca ___ ..."', hint:"o adjetivo que define a marca"},
+  {id:"s5_frase2", type:"text", label:'"...para pessoas que ___."', hint:"o que essas pessoas fazem, buscam ou valorizam"},
+  {id:"s5_personificacao", type:"textarea", label:"Se a marca fosse uma pessoa, como ela seria?", hint:"Descreva personalidade, comportamento, maneira de falar, roupas, hábitos etc."},
+  {id:"s5_caracteristicas", type:"checkbox", label:"Escolha até 5 características que representam a marca", max:5, allowOther:true,
+    options:["Elegante","Moderna","Clássica","Minimalista","Luxuosa","Divertida","Jovem","Ousada","Criativa","Artesanal","Natural","Tecnológica","Premium","Popular","Institucional","Sofisticada","Acolhedora","Exclusiva","Urbana","Tradicional"]},
+]},
+{n:6, title:"Concorrência", fields:[
+  {id:"s6_concorrentes", type:"textarea", label:"Quais são seus principais concorrentes?", hint:"Liste pelo menos 3."},
+  {id:"s6_admira", type:"textarea", label:"O que você admira nessas marcas?"},
+  {id:"s6_nao_gosta", type:"textarea", label:"O que você não gosta nessas marcas?"},
+  {id:"s6_referencia", type:"textarea", label:"Existe alguma marca que você considera uma referência? Por quê?"},
+  {id:"s6_aproximar_diferenciar", type:"textarea", label:"Você gostaria que sua identidade visual se aproximasse ou se diferenciasse visualmente do seu segmento?", hint:"Explique."},
+]},
+{n:7, title:"Referências Visuais", fields:[
+  {id:"s7_marcas_gosta", type:"textarea", label:"Existem marcas cuja identidade visual você gosta?", hint:"Envie links, fotos ou prints por e-mail/WhatsApp junto com este relatório."},
+  {id:"s7_o_que_gosta", type:"textarea", label:"O que exatamente você gosta nessas referências?", hint:"Logo, tipografia, cores, símbolo, fotografia, embalagem, layout, estilo geral..."},
+  {id:"s7_marcas_nao_gosta", type:"textarea", label:"Existem marcas ou estilos que você NÃO gosta?", hint:"Envie referências, se possível."},
+  {id:"s7_elemento_desejado", type:"textarea", label:"Existe algum elemento visual que você gostaria muito que estivesse presente?"},
+  {id:"s7_elemento_indesejado", type:"textarea", label:"Existe algum elemento visual que você NÃO quer de maneira alguma?"},
+]},
+{n:8, title:"Direção Visual", isSpectrum:true, help:"Escolha o lado que mais representa a marca. Essas respostas não determinam automaticamente o design — servem para entendermos a direção desejada.", fields:[
+  {id:"s8_1", type:"spectrum", left:"Tradicional", right:"Contemporânea"},
+  {id:"s8_2", type:"spectrum", left:"Minimalista", right:"Expressiva"},
+  {id:"s8_3", type:"spectrum", left:"Séria", right:"Divertida"},
+  {id:"s8_4", type:"spectrum", left:"Sofisticada", right:"Descontraída"},
+  {id:"s8_5", type:"spectrum", left:"Discreta", right:"Ousada"},
+  {id:"s8_6", type:"spectrum", left:"Artesanal", right:"Tecnológica"},
+  {id:"s8_7", type:"spectrum", left:"Premium", right:"Popular"},
+  {id:"s8_8", type:"spectrum", left:"Masculina", right:"Feminina"},
+  {id:"s8_obs", type:"textarea", label:"Observações sobre a direção visual"},
+]},
+{n:9, title:"Cores", fields:[
+  {id:"s9_obrigatoria", type:"textarea", label:"Existe alguma cor que obrigatoriamente deve estar presente?"},
+  {id:"s9_evitar", type:"textarea", label:"Existe alguma cor que você não quer utilizar?"},
+  {id:"s9_associacao", type:"textarea", label:"Existe alguma associação de cor importante para o negócio?", hint:"Ex.: verde = natureza, azul = confiança."},
+  {id:"s9_preferencia", type:"radio", label:"Você prefere uma identidade:", options:["Colorida","Monocromática","Neutra","Com uma cor de destaque","Não sei / quero que o designer defina"]},
+]},
+{n:10, title:"Logotipo", fields:[
+  {id:"s10_tipo", type:"radio", label:"A marca precisa necessariamente de:", options:["Logotipo tipográfico","Símbolo","Logotipo + símbolo","Monograma","Emblema","Não sei / quero orientação"]},
+  {id:"s10_elemento_simbolo", type:"textarea", label:"Existe algum elemento que gostaria de explorar no símbolo?"},
+  {id:"s10_simbolo_evitar", type:"textarea", label:"Existe algum símbolo que NÃO deve ser utilizado?"},
+  {id:"s10_nome_extenso", type:"textarea", label:"O nome da marca precisa aparecer sempre por extenso?"},
+  {id:"s10_abreviacoes", type:"textarea", label:"Existe alguma preocupação com abreviações, iniciais ou versões reduzidas?"},
+]},
+{n:11, title:"Aplicações", fields:[
+  {id:"s11_onde", type:"checkbox", label:"Onde a identidade será utilizada?", allowOther:true,
+    options:["Instagram","TikTok","Facebook","Site","WhatsApp","Cartão de visita","Papelaria","Embalagens","Uniformes","Fachada","Placas","Veículos","Materiais impressos","Apresentações","Produtos","E-commerce"]},
+  {id:"s11_prioritarias", type:"textarea", label:"Quais dessas aplicações são prioritárias?"},
+]},
+{n:12, title:"História da Marca", fields:[
+  {id:"s12_ideia_surgiu", type:"textarea", label:"Como surgiu a ideia da marca?"},
+  {id:"s12_historia_importante", type:"textarea", label:"Existe alguma história, pessoa, lugar, objeto ou acontecimento importante relacionado à marca?"},
+  {id:"s12_elemento_cultural", type:"textarea", label:"Existe algum elemento cultural, regional ou familiar que tenha importância para vocês?"},
+  {id:"s12_significado_oculto", type:"textarea", label:"Existe algum significado oculto ou conceito que você gostaria que pudéssemos explorar visualmente?"},
+]},
+{n:13, title:"Percepção Desejada", fields:[
+  {id:"s13_impressao", type:"textarea", label:"Qual seria a primeira impressão ideal ao conhecer a marca?"},
+  {id:"s13_pensamento", type:"textarea", label:"O que você gostaria que essa pessoa pensasse?"},
+  {id:"s13_sentimento", type:"textarea", label:"O que você gostaria que ela sentisse?"},
+  {id:"s13_palavra", type:"text", label:"Qual palavra você gostaria que ficasse associada à marca?"},
+]},
+{n:14, title:"Pergunta Final", fields:[
+  {id:"s14_frase_final", type:"textarea", label:"Se você pudesse nos entregar uma única frase para orientar todo o projeto, qual seria?"},
+  {id:"s14_percebida", type:"textarea", label:'Complete: "Quero que minha marca seja percebida como..."'},
+]},
+{n:15, title:"Material para Envio", help:"Marque o que você separou para enviar junto com este relatório (por e-mail ou WhatsApp).", fields:[
+  {id:"s15_materiais", type:"checkbox", label:"Material disponível para envio",
+    options:["Logo atual","Fotos da empresa/produtos","Fotos do espaço físico","Embalagens atuais","Materiais gráficos existentes","Redes sociais","Site","Referências visuais","Concorrentes","Outros materiais relevantes"]},
+]},
+];
+
+const answers = {}; // id -> value (string | array)
+let storageReady = false;
+
+/* ======================= RENDER FORM ======================= */
+const main = document.getElementById('main');
+const tabNav = document.getElementById('tabNav');
+
+function fieldCountable(f){
+  return f.type !== 'spectrum' ? 1 : 1;
+}
+
+function el(tag, cls, html){
+  const e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+SECTIONS.forEach(sec=>{
+  // tab
+  const tab = el('div','tab'); tab.dataset.sec = sec.n;
+  tab.innerHTML = `<span class="dot"></span><span class="label">${String(sec.n).padStart(2,'0')} ${sec.title}</span>`;
+  tab.addEventListener('click',()=>{
+    document.getElementById('card-'+sec.n).scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  tabNav.insertBefore(tab, tabNav.querySelector('.progress-mini'));
+
+  // card
+  const card = el('div','card'); card.id = 'card-'+sec.n;
+  const head = el('div','head');
+  head.innerHTML = `<div class="num">${String(sec.n).padStart(2,'0')}</div><h2>${sec.title}</h2>`;
+  card.appendChild(head);
+  if(sec.help){ card.appendChild(el('div','helptext', sec.help)); }
+
+  sec.fields.forEach(f=>{
+    const wrap = el('div','field');
+    if(f.type === 'textarea' || f.type === 'text'){
+      wrap.appendChild(el('label','q', f.label + (f.hint?`<span class="hint">${f.hint}</span>`:'')));
+      const input = document.createElement(f.type === 'textarea' ? 'textarea' : 'input');
+      if(f.type === 'text') input.type = 'text';
+      input.placeholder = 'Escreva aqui...';
+      input.addEventListener('input', ()=>{ answers[f.id] = input.value; onChange(); });
+      wrap.appendChild(input);
+      f._input = input;
+    } else if(f.type === 'radio'){
+      wrap.appendChild(el('label','q', f.label));
+      const list = el('div','radio-list');
+      f.options.forEach(opt=>{
+        const item = el('label','radio-item');
+        item.innerHTML = `<input type="radio" name="${f.id}" value="${opt}"><span>${opt}</span>`;
+        item.querySelector('input').addEventListener('change', ()=>{
+          answers[f.id] = opt;
+          list.querySelectorAll('.radio-item').forEach(i=>i.classList.remove('checked'));
+          item.classList.add('checked');
+          onChange();
+        });
+        list.appendChild(item);
+      });
+      wrap.appendChild(list);
+    } else if(f.type === 'checkbox'){
+      wrap.appendChild(el('label','q', f.label + (f.hint?`<span class="hint">${f.hint}</span>`:'')));
+      const chips = el('div','chips');
+      answers[f.id] = [];
+      f.options.forEach(opt=>{
+        const chip = el('label','chip');
+        chip.innerHTML = `<input type="checkbox" value="${opt}">${opt}`;
+        chip.querySelector('input').addEventListener('change', (e)=>{
+          toggleCheckbox(f, opt, e.target.checked, chip, wrap);
+        });
+        chips.appendChild(chip);
+      });
+      if(f.allowOther){
+        const chip = el('label','chip');
+        chip.innerHTML = `<input type="checkbox" value="Outro">Outro`;
+        const otherInput = el('input','outro-input'); otherInput.type='text'; otherInput.placeholder='Especifique...'; otherInput.style.display='none';
+        otherInput.addEventListener('input', ()=>{
+          const idx = answers[f.id].findIndex(v=>v.startsWith('Outro:'));
+          const val = 'Outro: ' + otherInput.value;
+          if(idx>=0) answers[f.id][idx] = val;
+          onChange();
+        });
+        chip.querySelector('input').addEventListener('change', (e)=>{
+          otherInput.style.display = e.target.checked ? 'block' : 'none';
+          toggleCheckbox(f, 'Outro: ' + otherInput.value, e.target.checked, chip, wrap, true);
+          if(e.target.checked) otherInput.focus();
+        });
+        chips.appendChild(chip);
+        wrap.appendChild(chips);
+        wrap.appendChild(otherInput);
+      } else {
+        wrap.appendChild(chips);
+      }
+      if(f.max){
+        const note = el('div','maxnote', `0 / ${f.max} selecionados`);
+        wrap.appendChild(note);
+        f._note = note;
+      }
+    } else if(f.type === 'spectrum'){
+      const spec = el('div','spectrum');
+      spec.innerHTML = `<div class="labels"><span>${f.left}</span><span>${f.right}</span></div>`;
+      const dots = el('div','dots');
+      for(let i=1;i<=5;i++){
+        const d = el('label','dot-opt');
+        d.innerHTML = `<input type="radio" name="${f.id}" value="${i}">`;
+        d.addEventListener('click', ()=>{
+          answers[f.id] = i;
+          dots.querySelectorAll('.dot-opt').forEach(x=>x.classList.remove('checked'));
+          d.classList.add('checked');
+          onChange();
+        });
+        dots.appendChild(d);
+      }
+      spec.appendChild(dots);
+      wrap.className = '';
+      wrap.appendChild(spec);
+    }
+    card.appendChild(wrap);
+  });
+
+  main.appendChild(card);
+});
+
+function toggleCheckbox(f, val, checked, chip, wrap, isOther){
+  if(!answers[f.id]) answers[f.id] = [];
+  const arr = answers[f.id];
+  if(checked){
+    if(f.max && arr.length >= f.max){
+      chip.querySelector('input').checked = false;
+      if(f._note){ f._note.classList.add('warn'); f._note.textContent = `Limite de ${f.max} atingido — desmarque uma opção para trocar.`; setTimeout(()=>{ f._note.classList.remove('warn'); updateMaxNote(f);},1800); }
+      return;
+    }
+    if(isOther){ arr.push(val); } else { arr.push(val); }
+    chip.classList.add('checked');
+  } else {
+    const idx = isOther ? arr.findIndex(v=>v.startsWith('Outro:')) : arr.indexOf(val);
+    if(idx>=0) arr.splice(idx,1);
+    chip.classList.remove('checked');
+  }
+  updateMaxNote(f);
+  onChange();
+}
+function updateMaxNote(f){
+  if(f._note){ f._note.textContent = `${(answers[f.id]||[]).length} / ${f.max} selecionados`; }
+}
+
+/* ======================= PROGRESS ======================= */
+let allFieldIds = [];
+SECTIONS.forEach(s=>s.fields.forEach(f=>allFieldIds.push({id:f.id, secN:s.n})));
+
+function isFilled(f){
+  const v = answers[f.id];
+  if(Array.isArray(v)) return v.length>0 && v.some(x=>x.trim && (x.trim()!=='' && x!=='Outro: '));
+  return v !== undefined && v !== null && String(v).trim() !== '';
+}
+
+function onChange(){
+  // header stamp
+  document.getElementById('stampNome').textContent = (answers['s1_nome'] && answers['s1_nome'].trim()) ? answers['s1_nome'] : '— não informado —';
+  const resp = ''; // no explicit responsavel field kept minimal; using nome only
+  document.getElementById('totalCount').textContent = allFieldIds.length;
+
+  let filled = 0;
+  const bySection = {};
+  SECTIONS.forEach(s=>{ bySection[s.n] = {total:0, filled:0}; });
+  allFieldIds.forEach(({id,secN})=>{
+    const f = findField(id);
+    const ok = isFilled(f);
+    bySection[secN].total++;
+    if(ok){ bySection[secN].filled++; filled++; }
+  });
+  document.getElementById('filledCount').textContent = filled;
+  const pct = Math.round((filled/allFieldIds.length)*100);
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  document.querySelectorAll('#tabNav .tab').forEach(tab=>{
+    const n = tab.dataset.sec;
+    const st = bySection[n];
+    tab.classList.toggle('done', st.filled === st.total && st.total>0);
+  });
+
+  scheduleAutosave();
+}
+function findField(id){
+  for(const s of SECTIONS) for(const f of s.fields) if(f.id===id) return f;
+}
+
+/* active tab on scroll */
+const cards = Array.from(document.querySelectorAll('.card'));
+const tabs = Array.from(document.querySelectorAll('#tabNav .tab'));
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const n = entry.target.id.replace('card-','');
+      tabs.forEach(t=>t.classList.toggle('active', t.dataset.sec === n));
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+cards.forEach(c=>io.observe(c));
+
+/* ======================= AUTOSAVE (window.storage) ======================= */
+let autosaveTimer = null;
+function scheduleAutosave(){
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(saveNow, 700);
+}
+async function saveNow(){
+  try{
+    localStorage.setItem('briefing-answers', JSON.stringify(answers));
+  }catch(e){ console.warn('Autosave falhou', e); }
+}
+async function loadSaved(){
+  try{
+    const raw = localStorage.getItem('briefing-answers');
+    if(raw){
+      const saved = JSON.parse(raw);
+      Object.keys(saved).forEach(id=>{
+        answers[id] = saved[id];
+        applyToDOM(id, saved[id]);
+      });
+      onChange();
+    }
+  }catch(e){ /* nothing saved yet */ }
+}
+function applyToDOM(id, val){
+  const f = findField(id);
+  if(!f) return;
+  if(f.type==='text' || f.type==='textarea'){
+    if(f._input) f._input.value = val;
+  } else if(f.type==='radio'){
+    const input = document.querySelector(`input[name="${id}"][value="${CSS.escape(val)}"]`);
+    if(input){ input.checked = true; input.closest('.radio-item').classList.add('checked'); }
+  } else if(f.type==='spectrum'){
+    const input = document.querySelector(`input[name="${id}"][value="${val}"]`);
+    if(input){ input.checked = true; input.closest('.dot-opt').classList.add('checked'); }
+  } else if(f.type==='checkbox'){
+    (val||[]).forEach(v=>{
+      let match = v.startsWith('Outro:') ? 'Outro' : v;
+      const chipInputs = document.querySelectorAll(`.chips input[type=checkbox]`);
+      chipInputs.forEach(ci=>{
+        const label = ci.closest('.chip');
+        const owner = ci.closest('.field');
+        if(owner && owner.querySelector('.q') && owner.querySelector('.q').textContent.startsWith(f.label.slice(0,10))){
+          if(ci.value === match){
+            ci.checked = true; label.classList.add('checked');
+            if(match==='Outro'){
+              const otherInput = owner.querySelector('.outro-input');
+              if(otherInput){ otherInput.style.display='block'; otherInput.value = v.replace('Outro: ',''); }
+            }
+          }
+        }
+      });
+    });
+  }
+}
+
+/* ======================= RESET ======================= */
+document.getElementById('btnReset').addEventListener('click', async ()=>{
+  if(!confirm('Isso vai apagar todas as respostas preenchidas. Tem certeza?')) return;
+  Object.keys(answers).forEach(k=> delete answers[k]);
+  try{ localStorage.removeItem('briefing-answers'); }catch(e){}
+  location.reload();
+});
+
+/* ======================= REPORT ======================= */
+document.getElementById('btnReport').addEventListener('click', buildAndShowReport);
+document.getElementById('btnClose').addEventListener('click', ()=>document.getElementById('overlay').classList.remove('open'));
+document.getElementById('btnPrint').addEventListener('click', ()=>window.print());
+document.getElementById('btnCopy').addEventListener('click', async ()=>{
+  const text = buildReportText();
+  try{
+    await navigator.clipboard.writeText(text);
+    const btn = document.getElementById('btnCopy');
+    const old = btn.textContent; btn.textContent = 'Copiado!';
+    setTimeout(()=>btn.textContent = old, 1500);
+  }catch(e){ alert('Não foi possível copiar automaticamente. Selecione o texto manualmente.'); }
+});
+document.getElementById('btnDownload').addEventListener('click', ()=>{
+  const text = buildReportText();
+  const nome = (answers['s1_nome']||'briefing').trim().replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase() || 'briefing';
+  const blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `briefing-${nome}.txt`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+function buildReportText(){
+  const nome = answers['s1_nome'] || 'Não informado';
+  const dateStr = new Date().toLocaleDateString('pt-BR', {day:'2-digit', month:'long', year:'numeric'});
+  let out = `BRIEFING ESTRATÉGICO DE IDENTIDADE VISUAL\n`;
+  out += `Marca: ${nome}\nRelatório gerado em: ${dateStr}\n`;
+  out += `${'='.repeat(60)}\n`;
+  SECTIONS.forEach(sec=>{
+    out += `\n${String(sec.n).padStart(2,'0')}. ${sec.title.toUpperCase()}\n${'-'.repeat(40)}\n`;
+    sec.fields.forEach(f=>{
+      if(f.type==='spectrum'){
+        const v = answers[f.id];
+        out += `${f.left} <-> ${f.right}: ${v ? `posição ${v}/5` : '(não respondido)'}\n`;
+        return;
+      }
+      const label = f.label || 'Observações';
+      let a = answers[f.id];
+      if(Array.isArray(a)) a = a.filter(Boolean).join(', ');
+      out += `\n${label}\n${(a && String(a).trim()) ? a : '(não respondido)'}\n`;
+    });
+  });
+  return out;
+}
+
+function buildAndShowReport(){
+  const nome = answers['s1_nome'] || 'Marca não informada';
+  const dateStr = new Date().toLocaleDateString('pt-BR', {day:'2-digit', month:'long', year:'numeric'});
+  const filled = document.getElementById('filledCount').textContent;
+  const total = document.getElementById('totalCount').textContent;
+
+  let html = `<h1>${escapeHTML(nome)}</h1>`;
+  html += `<div class="meta"><b>Briefing Estratégico de Identidade Visual</b><br>Gerado em ${dateStr} · ${filled} de ${total} campos preenchidos</div>`;
+
+  SECTIONS.forEach(sec=>{
+    html += `<h2><span class="n">${String(sec.n).padStart(2,'0')}</span> ${escapeHTML(sec.title)}</h2>`;
+    sec.fields.forEach(f=>{
+      if(f.type==='spectrum'){
+        const v = answers[f.id];
+        html += `<div class="report-q"><div class="q">${escapeHTML(f.left)} &nbsp;↔&nbsp; ${escapeHTML(f.right)}</div><div class="a ${v?'':'empty'}">${v ? 'Posição ' + v + ' de 5' : 'Não respondido'}</div></div>`;
+        return;
+      }
+      let a = answers[f.id];
+      if(Array.isArray(a)) a = a.filter(Boolean).join(', ');
+      const has = a && String(a).trim() !== '';
+      html += `<div class="report-q"><div class="q">${escapeHTML(f.label || 'Observações')}</div><div class="a ${has?'':'empty'}">${has ? escapeHTML(a) : 'Não respondido'}</div></div>`;
+    });
+  });
+
+  document.getElementById('reportBody').innerHTML = html;
+  document.getElementById('overlay').classList.add('open');
+}
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+/* ======================= INIT ======================= */
+onChange();
+loadSaved();
+</script>
+</body>
+</html>
